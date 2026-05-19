@@ -20,5 +20,5 @@ class Streamer:
                 break
             output_queue.put(frame)
 
-        output_queue.put(SENTINEL)
         cap.release()
+        output_queue.put(SENTINEL)
