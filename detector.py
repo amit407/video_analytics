@@ -18,7 +18,7 @@ class MotionDetector:
         thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
         thresh = cv2.dilate(thresh, None, iterations=2)
         cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if len(cnts) == 2:
+        if len(cnts) == 2:  # Handle different versions of openCV
             contours = cnts[0]
         else:
             contours = cnts[1]
@@ -26,7 +26,7 @@ class MotionDetector:
         detections = []
         for contour in contours:
             area = cv2.contourArea(contour)
-            if area < self.min_area:
+            if area < self.min_area:  # Ignore small contours caused by noise
                 continue
 
             x, y, w, h = cv2.boundingRect(contour)

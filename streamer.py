@@ -21,4 +21,4 @@ class Streamer:
             output_queue.put(frame)
 
         cap.release()
-        output_queue.put(SENTINEL)
+        output_queue.put(SENTINEL)  # notify downstream stages to terminate gracefully
